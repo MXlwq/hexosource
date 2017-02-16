@@ -1,0 +1,79 @@
+﻿---
+title: Finding a feasible course schedule using Tabu search(1)
+date: 2016-03-12 23:33:23
+tags: 论文翻译
+categories: 论文
+---
+## 文章地址[Finding a feasible course schedule using Tabu search](http://xueshu.baidu.com/s?wd=paperuri%3A%28f74ffc220b033483ff393a199cb46809%29&filter=sc_long_sign&tn=SE_xueshusource_2kduw22v&sc_vurl=http%3A%2F%2Fwww.sciencedirect.com%2Fscience%2Farticle%2Fpii%2F0166218X92902489%2Fpdf%3Fmd5%3D94d61449ea5a57cc8289de31b6da1af9%26pid%3D1-s2.0-0166218X92902489-main.pdf&ie=utf-8)
+
+## 翻译进度
+- [#] 介绍
+- [#] 问题描述
+- [ ] 禁忌搜索技术
+- [ ] 修改禁忌搜索
+- [ ] 数字化结果
+- [ ] 扩展
+- [ ] 结束语
+
+
+------
+## 作者和期刊相关
+期刊：Discrete Applied Mathematics
+THE JOURNAL OF COMBINATORIAL ALGORITHMS, INFORMATICS AND COMPUTATIONAL SCIENCES组合算法，信息与计算科学期刊
+<!--more-->
+## 作者信息:
+** Alain Hertz **
+I am the conductor of the CBTASNH choir
+Here is a recording of our interpretation of the song Uv'Nucha Yomar from Rosenblatt
+And here is a recording of our interpretation of the song Heye im Pifiot from Rivleen
+And here is a recording of our interpretation of the song Veal Yedey Avadecha from Kwartin
+And here is a recording of our interpretation of the song Kol Nidrey
+https://www.gerad.ca/~alainh/
+## 摘要部分
+Abstract 
+Hertz, A., Finding a feasible course schedule using Tabu search, Discrete Applied Mathematics 35 (1992) 255-270. 
+We consider a course scheduling problem in which the total number of time periods assigned to each topic has to be split into daily amounts of consecutive time periods called daily quantum. This daily quantum may be arbitrary but are bounded by given minimal and maximal values. 
+In addition to the classical constraints of course scheduling problems, precedence and time windows requirements are taken into account. We describe a new method based on Tabu search techniques for finding a feasible course schedule. 
+Keywords. Course scheduling, Tabu search, assignment problems.
+我们考虑了排课问题，其中分配给每门课程的总的时间被划分成每日连续时间段被称为每日量。这种每日量可以是任意的，但给定了最小和最大界。
+除了排课问题的传统限制，优先，时间窗口要求（time windows requirements）都考虑在内。我们描述寻找一个可行的排课技术——基于禁忌搜索技术找到新方法。
+关键词：排课，禁忌搜索，分配问题。
+## Introduction简介
+Finding a feasible course schedule is not an easy task. Conflicts due to courses taking place simultaneously but involving common students or teachers have to be avoided. In addition to these classical constraints, teachers’ availabilities, precedence, compactness, geographical and time windows requirements have to be taken into account. Moreover, a maximal allowed number of time periods is assigned to each working day. Furthermore, a total number of time periods is assigned to each topic; this total amount has to be split into daily amounts of consecutive time periods called daily quantum and bounded by given minimal and maximal values. The set of consecutive time periods of a daily quantum is defined to be a course. It follows that the number of courses is not known in advance and their length (number of consecutive time periods) is not fixed. Timetabling problems have already been studied by many authors. 
+Different approaches have been proposed [l-5,7,9,12,15] but most of them take into account only parts of the constraints and cannot be easily adapted to the case where the number of courses and their length are not known in advance. The purpose of this paper is to present a new global approach based on Tabu search techniques for tackling course scheduling problems in which the length of the courses are not necessarily known in advance. We shall first develop a model for the class-teacher timetabling problem. It will then be shown that this model can easily be extended for handling course scheduling problems in general. In the next section the course scheduling problem is formulated. The basic ideas of Tabu search techniques are sketched in Section 3. The adaptation of Tabu search to the class-teacher timetabling problem is described in Section 4, and experiments are reported in Section 5. Finally, extensions are discussed in Section 6 and concluding remarks are given in Section 7. 
+**一个可行的课程安排不是一件容易的事。由于很多课程同时在开，但对于同一学生或教师的课程冲突必须避免。除了这些传统的限制，教师可以上课，优先级，紧凑性，地点和时间窗口的要求，必须加以考虑。此外，每个工作日都有时间段数量的限制的。此外，每个时间段都被分配了一门课，这个时间段每天分配给连续时间段被称为每日量。并有最小值和最大值的界限。一天中连续的时间量被定义为一门课程。它遵循的课程的数量事先是不知道的，它们的长度（数个连续的时间段）是不固定的。已经有很多人在研究排课问题。不同的方法已经被提出[1- 5,7,9,12,15]但其中大多数只考虑了部分的限制，并且在课程的数量和它们的长度不在已知的情况下提前不适用。本文的目的是提出了一种基于禁忌搜索技术的新全局方法，可以解决在课程的长度实现并不知道的排课问题。我们首先制定了班级与教师排课问题的模型。该模型能够很容易地扩展来处理一般排课问题。在下一节中，排课问题被形式化表示。第3节大概表述了禁忌搜索技术的基本思想，第4节 描述了修改禁忌搜索算法来解决排课问题。第五部分做了实验，最后在第六部分做了扩展，第七部分是结束语。**
+## Problem formulation问题描述
+This paper has been motivated by a real-life class-teacher timetabling problem which is described in this section. There are several classes of students and each class follows its own fixed curriculum. A set of available working days within which all class curriculums must be completed is given. Each curriculum consists of a given set of subjects. For each subject, the earliest working day (release date) at which it can start and the latest working day (due date) at which it must be completed are specified. Each subject consists of a given set of topics. The topics of the curriculum of a class are partially ordered: this ordering specifies a predecessor-successor relation between the topics. Topics of different subjects can be in relation while topics from different classes are not in a predecessor-successor relation.  
+A fixed teacher is assigned to each topic and a teacher can teach one or more topics to one or more classes. The teachers and the classes are not necessarily available at each time period (a time period is usually defined as a 45-minute lecture hour) of each working day. For each working day a total number of time periods is given which can vary from day to day. Moreover, lunch breaks are fixed in advance and a course should not be interrupted by these breaks. A total number of time periods is assigned to each topic. This total amount must be split during the scheduling process into daily amounts of consecutive time periods called daily quantum. The set of consecutive time periods of a daily quantum is defined to be a course. The length of a course is its number of consecutive time periods. We distinguish two kinds of topics: 
+- for static topics, the daily quantum is fixed and ordered in advance, 
+- for dynamic topics, the daily quantum is arbitrary but bounded by given minimal and maximal values. For example, a dynamic topic with twelve time periods and for which each course consists of two or three consecutive time periods can be divided into the following unordered sequences of daily quantum: (2,2,2,2,2,2), (2,2,2,3,3) or (3,3,3,3). Dynamic topics appear quite naturally in practical problems. When a school has to build a course schedule, each teacher initially indicates how the total amount of time periods of his topics should approximately be distributed. This kind of information is in general not precise and the scheduler decides which is the length of each course. These choices may dramatically reduce the number of feasible course schedules. A model with dynamic topics avoids these undesired restrictions. 
+    Let US show by an example how the requests of a teacher can be taken into account without fixing the length of the courses in advance. Let us consider a teacher who has to distribute eight time periods in a week. He would like to teach one course of length two on Friday and the six remaining time periods should be scheduled before Thursday. The length of each course should be two or three. In such a situation, the scheduler can define two different topics: 
+- One static topic (with one daily quantum of value two) representing the course to be scheduled on Friday. The release and the due date of this topic are Friday.
+- One dynamic topic with six time periods. The release date of this topic is Monday, its due date is Wednesday, the maximal value of a daily quantum is three and the minimal value is two. 
+
+The six time periods of the dynamic topic represent either three courses of length two or two courses of length three. A model without dynamic topics would forbid one of these two possibilities. The problem to solve is to find a feasible course schedule for the given class curriculums and the given set of working days such that: (a) each teacher is involved in at most one topic at a time, (b) each class is involved in at most one topic at a time, (c) the predecessor-successor relation between the topics is satisfied, (d) the daily quantum of a static topic are correctly ordered, (e) the release and the due dates of all subjects are respected, (f) each topic is scheduled in such a way that the corresponding teacher is available during each time period of each course of the topic, (g) each course is scheduled in an uninterrupted way during available time periods of a working day, (h) two courses of a same topic are scheduled on two different working days, (i) the minimal and maximal numbers of consecutive time periods of each daily quantum of a dynamic topic are not violated. 
+This problem is known to be difficult. If we relax constraints (c), (d), (e), (h)and (i), and if we assume that we have no dynamic topic, the relaxed problem of finding a course schedule satisfying constraints (a), (b), (f) and (g) is proved to be NP-complete unless all teachers and all classes are always available. In classical timetabling problems, a given set of courses has to be scheduled, taking into account several constraints. We solve here a quite different problem. We do not know the number of courses and their length in advance. This makes the problem more complicated. The numerous scheduling methods described in the literature can generally not be applied in this case. For solving this timetabling problem we shall adapt the Tabu search technique which will be described in the next section.
+**本文的动机是被在本节中描述的一个真实的排课问题所激发的。有几个班的学生，每个班有自己固定的课程安排。一周工作日内，所有不同的课程都必须上完。每个课程安排由一组给定的科目组成。对于每一个科目，可以开始的最早的工作日（release date）和必须完成的最后的工作日（due date）都是确定的。每个科目（subject）由一组给定的课程（topics）组成。一个班级的课程安排的课程是部分有序的：这个顺序指定课程之间的前后继承关系。不同学科的课程可以是有关系的，而不同班级的课程没有前后继承关系。
+每一门课有固定的老师，一个老师能给多个班级交多门课。教师和班级不一定在每个工作日每个时间周期都有课（时间周期通常是一个45分钟的时间段）。每个工作日时间周期的总数目可以不同。此外，午休时间被预先固定并且一门课不能被这些休息时间打断。每门课被分配了一定的学时。学时总数在排课过程中必须分配到每天的连续时间，称为每天量。每天量的连续时间段集合被定义为一门课程。一个课程的长度是它的连续时间周期的数目（比如：48个学时）。我们区分两种类型的课程（topics）： 
+- 静态的课程，每天量是固定的，并且提前安排好了
+- 动态的课程，每天的量是任意的，而是有给定的最小值和最大值的限制。例如，有十二个时间段的动态课程，每节课包含了两到三个连续的时间段可以被划分为下面未排序的每天量序列（2,2,2,2,2,2），（ 2,2,2,3,3）或（3,3,3,3）。动态课程在实际问题中出现很正常。当学校必须建立一个课程表，每位老师一开始会说明他的课程安排的大致分布。这种信息通常都不是精确的并且调度者决定每节课的长度。这些选择可以大大降低可行的课程安排的数量。动态课程模型避免这些不需要的限制。让我们通过一个例子来说明即使没有事确定课程的长度如何考虑老师的要求。我们考虑，一个老师拥有在一周分配八个时段。他想在周五教一门两个课时的课，剩下的6个课时应该在周四之前的时间安排。每节课的长度应该是两个或三个课时。在这种情况下，调度程序可以定义两个不同的规则（topics）：
+- 一个静态的规则（有两小时的每天量）代表课程在周五安排。这个规则中开始和结束时期都是周五
+- 有6个时间段一个动态的规则。本规则的发布的日期是星期一，它的到期日是星期三，每日量子的最大值是三个，最小值为两个。
+动态主题的6个时间段长度代要么是三次两个课时要么是两次三个课时。没有动态规则的模型禁用两个规则之一。要解决问题就要为得到可行的课表，在给定课程安排和给定的工作日集合：（a）每个教师在一次只能上一门课（b）一个班级一次只能上一门课（c）课程之间的前后继承关系得到满足，（d）静态课程的日常量正确排序，（e）开始和结束的日期要满足（f）每个课程用这样的方式安排：相应的教师在每门课程的每个时间段都要是可以上课的（没有其他课需要上）（g）每一课程是在工作日期间的可用时间段，（h）一门课程的两节课要安排在两个不同的工作日（i）每个动态课程的每天量的最小和最大数不能违反。
+这个问题都知道是很困难的。如果我们放松约束（c），（d），（e），（h）和（i），并且如果我们假设我们有没有动态的课程，寻找满足约束（a），（b），（f）和（g）的课程表被证明是NP完全问题（NP完全问题(NP-C问题)，是世界七大数学难题之一。 NP的英文全称是Non-deterministic Polynomial的问题，即多项式复杂程度的非确定性问题。），除非所有的老师和所有的班级都是始终是可以上课的。古典时间安排问题中，考虑一些约束，来安排课程集合。在这里，我们解决了一个完全不同的问题。我们不知道的课程的数量和它们的预先长度。这使问题更为复杂。在文献中描述的许多调度方法通常不能在此情况下被应用。为了解决这个时间表问题，我们修改了的禁忌搜索技术, 将在下一节中描述。**
+## Tabu search techniques 禁忌搜索技术
+Tabu search is a metaheuristic designed for getting a global optimum to a combinatorial optimization problem. It has been first suggested by Glover [lo] and independently by Hansen et al. [l 11 for a specific application, and later developed in a more general framework. A description of the method can be found in [6, 10]. Tabu search has already been efficiently adapted to a large collection of applications [6,11-14,161. We shall sketch here the basic ideas of the technique. i\n objective function f has to be minimized on a set X of feasible solutions. A neighborhood N(s) is defined for each solution s in X. The set X and the definition of the neighborhood induce a state-space graph G (which may by the way be infinite). Tabu search is basically an iterative procedure which starts from an initial feasible solution and tries to reach an optimal solution by moving step by step in the state-space graph G. Each step consists in first generating a collection V* of solutions in the neighborhood N(s) of the current solution s, and then moving to the best solution s’ in V*, even if f (s?> f (s). Let us write s’=s@ m with the meaning that s’ is obtained by applying a modification m to s. The solutions consecutively visited in the iterative process induce an oriented path in G. Finding the best solution in V* may sometimes be a nontrivial matter. It may be necessary to solve the optimization problem min(_f(si) 1 Si E V*} by a heuristic procedure. A risk of cycling exists as soon as a solution s’ worse than s is accepted. In order to prevent cycling to some extent, modifications which would bring us back to a previously visited solution should be forbidden. But it may sometimes be useful to come back to an already visited solution and continue the search in another direction from there. This is realized in Tabu search by keeping a list T containing the last k modifications (k may be fixed or variable). Whenever a modification m is made for moving from s to s’, m is introduced in T and its reverse is considered as tabu. Deciding that some moves are tabu moves may be too absolute: it is shown in [6] that moves to solutions which have not been visited may be tabu. For this reason, it should be possible to cancel the tabu status of a move if it seems desirable to do so. This is realized as follows. Let s be the current solution and m a modification which we want to apply to s. A penalization a(s, m) and a threshold value A(s, m) are computed: if a(s, m) <A(s,m),then the tabu status of m(at s) is cancelled. We can for example define a(s,m)=f(s+m) and A(s,m)=f(s*) where s* is the best solution encountered so far: the tabu status of m is cancelled if the solution s’=s+ m is better than the previous best solution s*.The function A is called the aspiration function. 
+Stopping rules have to be defined. if a lower bound f * of the minimum value of f is known then the process may be interrupted when the value of the current solution is close enough to f *, Moreover, the procedure is terminated if no improvement of the best solution s* found so far has been made during a given number nmax of iterations. 
+A general description of Tabu search is given in Fig. 1. In the next section we shall describe the adaptation of Tabu search to the course scheduling problem.
+**3.禁忌搜索技术
+禁忌搜索是专为得到一个全局最优，以组合优化问题启发式。它由格洛弗[LO]和自主Hansen等被首次提出。 [L 11为一个特定的应用程序，后来在一个更一般的框架开发的。该方法的描述可以在[6,10]中找到。禁忌搜索已经被有效地适应于大集合的应用[6,11-14,161。我们将在这里勾画了该技术的基本思路。我的\ n目标函数f有可行的解决方案的集合X被最小化。邻域N（S）是对于每个定义的溶液S X中的一组X和附近的定义诱导状态空间图G（其可通过的方式是无限的）。禁忌搜索基本上是从一个初始可行溶液开始并试图通过步骤在状态空间图G的每个步骤包括首先产生的解决方案的集合V *的邻域N移动步骤，以达到最佳的解决方案的迭代过程（多个）当前溶液S，然后移动到最佳解决方案s“的单位为V *，甚至当f（S 1> F（S）。让我们写出s'的= S @米的含义，且s'是通过施加变形米为s获得。在迭代过程连续访问的解决方案诱导G.定向路径寻找在V *的最佳解决方案有时可能是一个非平凡的事情。它可能有必要解决优化问题分（_f （SI）1硅EV *}由启发式的过程。循环的风险，一旦存在，作为一种解决方案S'比更糟糕的是接受。为了防止自行车在一定程度上，这将使我们回到以前访问过修改溶液应被禁止，但有时可能有用回来到一个已经访问过的溶液，并从那里继续在另一个方向上的搜索范围。这在禁忌搜索通过保持包含最后K个修饰（k可以是固定的或可变的）的列表Ť实现。每当修改m被用于从s移动到s“的取得，将m T中引入和它的反向被认为是禁忌。决定，一些动作是禁忌的动作可能是太绝对的：它是在[6]所示该移动到还没有被访问过可能是禁忌的解决方案。出于这个原因，应该有可能取消一个移动的禁忌状态，如果它似乎希望这样做。这是如下实现的。令s为当前解决方案和m，我们希望应用为s的变形。一个惩罚一个（S，M）和阈值A（S，M）计算：如果（S，M）<A（S，M），则m的禁忌状态（在S）被取消。例如，我们可以定义一个（S，M）= F（S + M）和（S，M）= F（S *），其中S *是最好的解决方案遇到这么远：m的禁忌状态将被取消，如果解S'= S + m是比以前的最佳解决方案S * .The功能的称为吸功能较好。
+停止规则必须被定义。如果f的最小值的一个下界F *是已知然后该过程可以当电流溶液的值是足够接近到f *中断，此外，该过程，如果没有的最佳解决方案的S改善*发现终止到目前为止迭代的给定数Nmax期间已经取得进展。
+禁忌搜索的一般性描述图中给出。 1.在下一节中，我们将介绍禁忌的适应搜索到排课问题。**
+
+
+
+
+
+## 公式
+
+$$y=x^2$$

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+Allow: /about
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /vendors/
+
+Sitemap: http://liwenquan.top/sitemap.xml
+Sitemap: http://liwenquan.top/baidusitemap.xml
